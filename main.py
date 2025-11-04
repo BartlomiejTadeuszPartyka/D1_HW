@@ -1,7 +1,6 @@
-from math import ceil
-
 # 1. Napisz program do przeliczania stopni Celsjusza na Fahrenheita i odwrotnie (niech program zapyta o kierunek konwersji)
-def convert_temperatures():
+def convert_temperatures() -> None:
+    """Converts temperatures between degrees Celsius and Fahrenheit, as prompted by the user."""
     print("~~Konwerter temperatur~~")
     while True:
         print("\nDostępne opcje:\n\t1. Stopnie Celsjusza do stopni Fahrenheita\n\t2. Stopnie Fahrenheita do stopni Celsjusza\n\t3. Wyjście")
@@ -20,7 +19,8 @@ def convert_temperatures():
             print(f"Podano błędną instrukcję: {option}. Spróbuj ponownie.")
 
 # 2. Napisz program do obliczania pola powierzchni koła o zadanym promieniu (wyświetlając wzór i kolejne obliczenia)
-def calculate_circle_area():
+def calculate_circle_area() -> None:
+    """Calculates circle area based on user-defined radius. Shows calculations step by step."""
     PI = 3.14
     print("~~Program do obliczania pola koła~~")
     while True:
@@ -44,7 +44,8 @@ def calculate_circle_area():
 #     |       |
 #     |       |
 #     +---+
-def draw_rectangle():
+def draw_rectangle() -> None:
+    """Draws a simple rectangle as per user's instructions."""
     while True:
         width = int(input("\nPodaj szerokość prostokąta: "))
         height = int(input("Podaj wysokość prostokąta: "))
@@ -60,7 +61,8 @@ def draw_rectangle():
             break
 
 # 4. Napisz do przeliczania liczby zapisanej w formacie binarnym na system dziesiętny i odwrotnie (niech program zapyta o kierunek konwersji)
-def convert_binary():
+def convert_binary() -> None:
+    """Converts numbers between decimal and binary, as prompted by the user."""
     print("~~Konwerter systemu dwójkowego~~")
     while True:
         print("\nDostępne opcje:\n\t1. System dziesiątkowy do systemu dwójkowego\n\t2. System dwójkowy do systemu dziesiątkowego\n\t3. Wyjście")
@@ -80,13 +82,15 @@ def convert_binary():
             print(f"Podano błędną instrukcję: {option}. Spróbuj ponownie.")
 
 # 5. Napisz program do sprawdzania czy podany rok jest rokiem przestępnym.
-def check_leap_year():
+def check_leap_year() -> None:
+    """Checks if the year is a leap year."""
     print("~~Sprawdź, czy dany rok jest rokiem przestępnym~~")
     while True:
         print("Podaj rok do sprawdzenia lub wpisz 'E', aby wyjść")
-        year = int(input(">>> "))
+        year = input(">>> ")
         if year.isdigit():
-            if (rok % 4 == 0 and rok % 100 != 0) or (rok % 400 == 0):
+            year = int(year)
+            if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
                 print(f"Rok {year} jest rokiem przestępnym")
             else:
                 print(f"Rok {year} nie jest rokiem przestępnym")
@@ -94,7 +98,8 @@ def check_leap_year():
             break
 
 # 6. Napisz program do wyliczania silni dla zadanej liczby
-def factorial_calculator():
+def factorial_calculator() -> None:
+    """A simple factorial calculator."""
     print("~~Kalkulator silni~~")
     while True:
         print("Podaj liczbę, której silnię chcesz obliczyć lub wpisz 'E', aby wyjść")
@@ -108,67 +113,35 @@ def factorial_calculator():
             break
 
 # 7. Program przyjmuje kwotę w parametrze i wylicza jak rozmienić to na monety: 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01 wydając ich jak najmniej.
-def change_calculator():
+def change_calculator(amount: float) -> None:
+    """A simple function to optimise change.
+    :param amount: amount to change
+    :type amount: float"""
     print("~~Optymalna maszynka do rozmieniania~~")
-    while True:
-        print("Podaj liczbę, którą chcesz rozmienić lub wpisz 'E', aby wyjść")
-        amount = input(">>> ")
-        five_zloty = 0
-        two_zloty = 0
-        one_zloty = 0
-        fifty_grosz = 0
-        twenty_grosz = 0
-        ten_grosz = 0
-        five_grosz = 0
-        two_grosz = 0
-        one_grosz = 0
-        if amount.isalpha():
-            break
-        else:
-            amount = int(ceil(float(amount) * 100))
-            # pieciozlotowki
-            temp = amount % 500
-            five_zloty = (amount - temp) / 500
-            amount = temp
-            # dwuzlotowki
-            temp = amount % 200
-            two_zloty = (amount - temp) / 200
-            amount = amount
-            # jednozlotowki
-            temp = amount % 100
-            one_zloty = (amount - temp) / 100
-            amount = temp
-            #50-groszówki
-            temp = amount % 50
-            fifty_grosz = (amount - temp) / 50
-            amount = temp
-            #  20-groszówki
-            temp = amount % 20
-            twenty_grosz = (amount - temp) / 20
-            amount = temp
-            # 10-groszówki
-            temp = amount % 10
-            ten_grosz = (amount - temp) / 10
-            amount = temp
-            # pięciogroszówki
-            temp = amount % 5
-            five_grosz = (amount - temp) / 5
-            amount = temp
-            # dwugroszówki
-            temp = amount % 2
-            two_grosz = (amount - temp) / 2
-            amount = temp
-            # jednogroszówki
-            temp = amount % 1
-            one_grosz = (amount - temp) / 1
-            amount = temp
-            print(f"Potrzebujesz następujących monet\n\t5: {five_zloty}\n\t2: {two_zloty}\n\t1: {one_zloty}\n\t0.50: {fifty_grosz}\n\t0.20: {twenty_grosz}\n\t0.10: {ten_grosz}\n\t0.05: {five_grosz}\n\t0.02: {two_grosz}\n\t0.01: {one_grosz}")
+    coins =  {"500": 0,
+                "200": 0,
+                "100": 0,
+                "50": 0,
+                "20": 0,
+                "10": 0,
+                "5": 0,
+                "2": 0,
+                "1": 0}
+    print("Potrzebujesz następujących monet:")
+    amount = int(round(amount, 2) * 100)
+    for coin in coins:
+        temp = amount % int(coin)
+        coins[coin] = (amount - temp) / int(coin)
+        amount = temp
+        print(f"\t{int(coin)/100}: {coins[coin]}")
+
 
 # 8. Program rysujący piramidę o określonej wysokości, np dla 3
 #         #
 #       ###
 #     #####
-def draw_pyramid():
+def draw_pyramid() -> None:
+    """Draw a simple pyramid with user-defined height"""
     print("~~Narysuj sobie piramidkę~~")
     while True:
         print("Podaj liczbę pięter lub wpisz 'E', aby wyjść")
@@ -177,7 +150,6 @@ def draw_pyramid():
             break
         else:
             height = int(height)
-            base_width = (height * 2) - 1
             for i in range(1, height+1):
                 placeholder = ' ' * (height - i)
                 hashes = '#' * (2 * i -1)
@@ -192,9 +164,104 @@ def draw_pyramid():
 #    Maksymalna szerokość kolumny np 30znaków jesli tekst będzie za długi niech zawartość przycina się i kończy trzema kropkami.
 #    A jeszcze większym atutem będzie gdy będzie można podać liste zagnieżdżoną i narysuje się tabela z odpowiednią ilością wierszy i kolumn
 
+def nested_depth_level(lst) -> int:
+    """Checks if a list is nested and returns values:
+    0 - not a list
+    1 - a non-nested list
+    2 - a nested list
+    :param lst: list to check
+    :type lst: list
+    :return: nesting depth"""
+    for item in lst:
+        if isinstance(item, list):
+            if any(isinstance(subitem, list) for subitem in item):
+                return 2  # więcej niż jeden poziom
+            else:
+                return 1  # tylko jeden poziom
+    return 0  # brak zagnieżdżenia
+
+
+def longest_sublist_length(lst) -> int:
+    """Returns length of longest sublist or 0 if list is not nested.
+    :param lst: list to check
+    :type lst: list
+    :return: length of the longest sublist"""
+    sublists = [item for item in lst if isinstance(item, list)]
+    if not sublists:
+        return 0
+    return max(len(sublist) for sublist in sublists)
+
+
+def format_string(cell_content: str) -> str:
+    """Formats a string according to requirements
+    :param cell_content: cell content to be formatted
+    :type cell_content: str
+    :return: formatted cell content"""
+    if len(cell_content) > 30:
+        return cell_content[:27] + "..."
+    else:
+        return cell_content.ljust(30)
+
+
+def draw_horizontal_line(n_columns: int) -> None:
+    """Draws a horizontal line
+    :param n_columns: number of columns in the table
+    :type n_columns: int
+    :return: None"""
+    HORIZONTAL_LINE = "+" + "-" * 34
+    print(HORIZONTAL_LINE * n_columns + "+")
+
+
+def draw_row(content: list) -> None:
+    """Draws a row with contents
+    :param content: content to be put into cells, each item is printed in a separate cell
+    :type content: list
+    :return: None"""
+    VERTICAL_LINE = "|  "
+    row = ""
+    for cell in content:
+        cell = format_string(str(cell))
+        row += VERTICAL_LINE + cell + "  "
+    row += "|"
+    print(row)
+
+
+def draw_table(content: list) -> None:
+    """
+    Prints list's content as a table.
+    :param content: A list containing the table's content.
+                    In case of a nested list, each sub-list is treated as a row.
+    :return: None
+    """
+    print("~~Narysuj sobie tabelę~~")
+    nesting_level = nested_depth_level(content)
+
+    if nesting_level == 0:
+        # Jednowierszowa tabela
+        columns_number = len(content)
+        draw_horizontal_line(columns_number)
+        draw_row(content)
+        draw_horizontal_line(columns_number)
+
+    elif nesting_level == 1:
+        # Tabela wielowierszowa
+        rows_number = len(content)
+        columns_number = longest_sublist_length(content)
+
+        draw_horizontal_line(columns_number)
+        for row_index in range(rows_number):
+            row = content[row_index]
+            # Dopełnij brakujące komórki pustymi stringami
+            padded_row = row + [""] * (columns_number - len(row))
+            draw_row(padded_row)
+            draw_horizontal_line(columns_number)
+
+    else:
+        print("Uwaga! Twoja lista ma zbyt wiele poziomów zagnieżdżenia. Sprawdź poprawność swoich danych.")
+
 
 def main():
-    draw_pyramid()
+    draw_table([[1, 2, 3], [4, ''], [7, "Dłuuuuuuuuuuuuugi tekst", "Jeszcze dłuuuuuuuuuuuuższy tekst"]])
 
 if __name__ == "__main__":
     main()
