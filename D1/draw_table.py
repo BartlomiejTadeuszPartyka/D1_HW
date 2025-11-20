@@ -75,7 +75,7 @@ def draw_table(content: list) -> None:
                     In case of a nested list, each sub-list is treated as a row.
     :return: None
     """
-    print("~~Narysuj sobie tabelę~~")
+    # print("~~Narysuj sobie tabelę~~")
     nesting_level = nested_depth_level(content)
 
     if nesting_level == 0:
@@ -93,7 +93,6 @@ def draw_table(content: list) -> None:
         draw_horizontal_line(columns_number)
         for row_index in range(rows_number):
             row = content[row_index]
-            # Dopełnij brakujące komórki pustymi stringami
             padded_row = row + [""] * (columns_number - len(row))
             draw_row(padded_row)
             draw_horizontal_line(columns_number)
